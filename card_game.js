@@ -1,9 +1,3 @@
-/**
- * Created by alexjag on 7/6/16.
- */
-
-//TODO: potentially add webcam and message when playing bullshit game
-
 function Deck() {
     this.deck = [];
 }
@@ -42,7 +36,6 @@ Deck.prototype.shuffle = function () {
 
 Deck.prototype.reset = function () {
     this.create();
-
     console.log(this.deck);
     return this;
 };
@@ -127,7 +120,6 @@ Game.prototype.addAllCardsToPlayerHand = function () {
         // console.log(this.playersList[player_index] + 'has card' + this.deck['deck'][card_index]);
     }
     console.log(this.playersList[player_index].hand);
-
 };
 
 
