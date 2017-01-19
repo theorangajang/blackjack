@@ -1,5 +1,5 @@
 # blackjack
-this is a simple blackjack game using React on the front-end with Node on the back-end
+Uses React JS on front-end and Node on back-end
 
 
 Features Finished
@@ -12,3 +12,8 @@ Features Needed
 - Track hand amount 
 - House player 
 - Disable features to buttons
+
+Potential
+- Database (with MongoDB) for other players and info
+- Sockets with multiple rooms for players to play in
+- Betting feature
