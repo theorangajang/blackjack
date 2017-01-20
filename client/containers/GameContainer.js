@@ -8,19 +8,36 @@ class GameContainer extends React.Component {
     constructor(props) {
         super(props);
         console.log(this.props.deck);
+        this.state = {
+            player: {
+                hand: this.props.hand
+            },
+            deck: this.props.deck,
+            foldedCards: this.props.foldedCards
+        };
         this.dealCard = this.dealCard.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        console.log("component is about to receive props");
+        console.log(nextProps);
+        this.setState({
+            hand: nextProps.hand,
+            deck: nextProps.deck,
+            foldedCards: nextProps.foldedCards
+        });
     }
 
     dealCard(){
         console.log("deal card");
-        this.props.dealCards(this.props.deck);
+        this.props.dealCards(this.state.deck);
     }
 
     render(){
         return(
             <div>
                 <GameComponent dealCard={this.dealCard} hitMe={this.hitMe} foldHand={this.foldHand}/>
-                <BoardContainer foldedCards={this.props.foldedCards} hand={this.props.hand} deck={this.props.deck}/>
+                <BoardContainer foldedCards={this.state.foldedCards} hand={this.state.hand} deck={this.state.deck}/>
             </div>
         )
     }

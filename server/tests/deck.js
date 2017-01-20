@@ -1,3 +1,5 @@
+//TODO: do tests for API
+
 let describe = require('mocha').describe,
     it = require('mocha').it,
     chai = require('chai'),
@@ -40,7 +42,7 @@ describe('API TESTS', () => {
     });
 
     describe('GET /api/create', () => {
-        it('should create deck with jwt', (done) => {
+        it('should create deck', (done) => {
             chai.request(base_url)
                 .get('/api/create')
                 .end((err, res) => {
@@ -49,9 +51,7 @@ describe('API TESTS', () => {
                     }else{
                         expect(res.status).to.equal(200);
                         let expectedDeck = deckMethods.createDeckFunc();
-                        let token = res.body.token;
-                        let requestedDeck = jwt.decode(token, {completed: true});
-                        for(let i = 0; i < requestedDeck.length; i++){
+                        for(let i = 0; i < res.body.deckData.length; i++){
                             expect(requestedDeck.deckData[i]).to.equal(expectedDeck[i]);
                         }
                     }
@@ -59,4 +59,23 @@ describe('API TESTS', () => {
                 })
         })
     });
+
+    // describe('GET /api/create', () => {
+    //     it('should create deck', (done) => {
+    //         chai.request(base_url)
+    //             .get('/api/ace')
+    //             .end((err, res) => {
+    //                 if(err){
+    //                     expect(res.status).to.equal(404);
+    //                 }else{
+    //                     expect(res.status).to.equal(200);
+    //                     let expectedDeck = deckMethods.createDeckFunc();
+    //                     for(let i = 0; i < res.body.deckData.length; i++){
+    //                         expect(requestedDeck.deckData[i]).to.equal(expectedDeck[i]);
+    //                     }
+    //                 }
+    //                 done();
+    //             })
+    //     })
+    // });
 });

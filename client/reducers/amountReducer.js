@@ -1,4 +1,4 @@
-import { CALCULATE_HAND } from '../actions/constants';
+import { CALCULATE_HAND, RESET_GAME } from '../actions/constants';
 
 const initialState = {
     amount: 0
@@ -10,7 +10,12 @@ export default (state = initialState, action) => {
             state = {
                 ...state,
                 amount: action.sumOfHand
-
+            };
+            return state;
+        case 'RESET_GAME':
+            state = {
+                ...state,
+                amount: action.payload.amount
             };
             return state;
         default:

@@ -1,8 +1,8 @@
-import { CREATE_GAME, DEAL_CARDS, HIT_ME, FOLD_HAND } from '../actions/constants';
+import { CREATE_GAME, DEAL_CARDS, HIT_ME, FOLD_HAND, RESET_GAME } from '../actions/constants';
 
 const initialState = {
     player: {
-        hand: []
+        hand: [],
     },
     deck: [],
     foldedCards: []
@@ -43,6 +43,16 @@ export default (state = initialState, action) => {
                 },
                 deck: action.payload.deck,
                 foldedCards: action.payload.foldedCards
+            };
+            return state;
+        case 'RESET_GAME':
+            state = {
+                ...state,
+                player: {
+                    hand: [],
+                },
+                deck: action.payload.newDeck,
+                foldedCards: []
             };
             return state;
         default:

@@ -8,15 +8,6 @@ let url = "http://localhost:3000";
 //////////////////////////
 ///////GET HAND SUM///////
 //////////////////////////
-// export function getHandSum(){
-//     return dispatch => {
-//         return axios.get(url+'/api/calculate')
-//             .then((calculatedResponse) => {
-//             console.log(calculatedResponse.data.handSum);
-//             dispatch(calculationHandAction(calculatedResponse.data.handSum));
-//         });
-//     }
-// }
 function getHandSum(){
     return dispatch => {
         return axios.get(url+'/api/calculate')
@@ -36,10 +27,8 @@ export function startGame(){
     return dispatch => {
         return axios.get(url+"/api/create")
                 .then((res) => {
-                    let token = res.data.token;
-                    localStorage.setItem('id_token', token);
-                    setAuthorizationToken(token);
-                    dispatch(createDeckAction(jwtDecode(token)));
+                    let deck = res.data.deckData;
+                    dispatch(createDeckAction(deck));
         });
     }
 }
@@ -85,6 +74,15 @@ export function foldHand(playersHand){
             .then((res) => {
                 dispatch(foldHandAction(res.data));
                 dispatch(getHandSum());
+            });
+    }
+}
+
+export function resetEntireGame() {
+    return dispatch => {
+        return axios.get(url+"/api/create")
+            .then((res) => {
+                dispatch(resetGame(res.data.deckData));
             });
     }
 }
@@ -141,6 +139,16 @@ function calculationHandAction(sum){
     return {
         type: action.CALCULATE_HAND,
         sumOfHand: sum
+    }
+}
+
+function resetGame(newDeck){
+    return {
+        type: action.RESET_GAME,
+        payload:{
+            newDeck: newDeck,
+            amount: 0
+        }
     }
 }
 

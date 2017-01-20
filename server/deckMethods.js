@@ -40,6 +40,7 @@ export function calculatePlayerHandWithAce(aceValueChosen){
 
 export function dealCardsFunc(currentDeck) {
     let playerHand = [];
+    currentPlayerHandAmount = 0;
     for (let index = 0; index < 2; index++) {
         let card = currentDeck.pop();
         playerHand.push(card);
@@ -63,13 +64,10 @@ export function hitMeFunc(gameState) {
 
 export function foldHandFunc(foldedGameState) {
     let foldedCards = [];
-
     for (let hand_index = 0; hand_index < foldedGameState.hand.length; hand_index++) {
         foldedCards.push(foldedGameState.hand[hand_index]);
     }
-
     foldedGameState.hand = [];
-
     return {
         foldedCards: foldedCards,
         playersHand: foldedGameState.hand,
@@ -78,13 +76,17 @@ export function foldHandFunc(foldedGameState) {
 }
 
 function calculatePlayerHandAmount(playerHand) {
-    for(let hand_index = 0; hand_index < playerHand.length; hand_index++){
-        console.log(playerHand[hand_index].number);
-        if(playerHand[hand_index].number !== 'A'){
-            if(playerHand[hand_index].number === 'J' ||  playerHand[hand_index].number === 'Q' ||  playerHand[hand_index].number === 'K'){
-                currentPlayerHandAmount += 10;
-            }else{
-                currentPlayerHandAmount += playerHand[hand_index].number;
+    if(playerHand.length <= 0){
+        currentPlayerHandAmount = 0;
+    }else{
+        for(let hand_index = 0; hand_index < playerHand.length; hand_index++){
+            console.log(playerHand[hand_index].number);
+            if(playerHand[hand_index].number !== 'A'){
+                if(playerHand[hand_index].number === 'J' ||  playerHand[hand_index].number === 'Q' ||  playerHand[hand_index].number === 'K'){
+                    currentPlayerHandAmount += 10;
+                }else{
+                    currentPlayerHandAmount += playerHand[hand_index].number;
+                }
             }
         }
     }

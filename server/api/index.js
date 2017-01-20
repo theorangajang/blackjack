@@ -7,8 +7,7 @@ let deck = createDeckFunc();
 
 router.get('/create', (req, res) => {
     let shuffledDeck = shuffleFunc(deck);
-    let jwtToken = jwt.sign({ deckData: shuffledDeck }, 'this is a secret');
-    res.json({token: jwtToken})
+    res.json({ deckData: shuffledDeck });
 });
 
 router.get('/calculate', (req, res) => {
@@ -22,7 +21,8 @@ router.post('/ace', (req, res) => {
 });
 
 router.post('/deal', (req, res) => {
-   let dealGameState = dealCardsFunc(req.body.deckData);
+    console.log(req.body);
+   let dealGameState = dealCardsFunc(req.body);
    res.json({
        hand: dealGameState.hand,
        withNewDeck: dealGameState.withNewDeck

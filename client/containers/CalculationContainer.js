@@ -1,17 +1,32 @@
 import React from 'react';
 import { connect } from 'react-redux'
-// import { getHandSum } from '../actions/index';
+import { resetEntireGame } from '../actions/index';
 import CalculationComponent from '../components/CalculationComponent';
 
 class CalculationContainer extends React.Component {
     constructor(props){
         super(props);
-        // this.props.getHandSum();
+        this.state = {
+            amount: 0
+        };
+        this.resetEntireGame = this.resetEntireGame.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        console.log("CalculationComponent is about to receive props");
+        console.log(nextProps);
+        this.setState({
+            amount: nextProps.amountState
+        });
+    }
+
+    resetEntireGame(){
+        this.props.resetEntireGame()
     }
 
     render() {
         return (
-            <CalculationComponent amount={this.props.amountState}/>
+            <CalculationComponent resetEntireGame={this.resetEntireGame} amount={this.state.amount}/>
         )
     }
 }
@@ -22,4 +37,4 @@ const mapStateToProps = (store) => {
     }
 };
 
-export default connect(mapStateToProps)(CalculationContainer)
+export default connect(mapStateToProps, { resetEntireGame })(CalculationContainer)
