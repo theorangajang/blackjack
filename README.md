@@ -6,11 +6,12 @@ Features Finished
 - Deal
 - Fold
 - Hit 
-- Amount in hand
+- Track hand amount 
+
 
 Features Needed
-- Track hand amount 
-- House player 
+- Add picture features
+- House player
 - Disable features to buttons
 
 Potential
