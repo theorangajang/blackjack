@@ -10,7 +10,7 @@ Features Finished
 
 
 Features Needed
-- Add picture features
+- Add picture for cards
 - House player
 - Disable features to buttons
 
