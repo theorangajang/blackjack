@@ -1,20 +1,20 @@
-# blackjack
+# Blackjack
+**Currently working on Roomies App**
+
 Uses React JS on front-end and Node on back-end
 
-
-Features Finished
+**Features Finished**
 - Deal
 - Fold
 - Hit 
 - Track hand amount 
 
-
-Features Needed
+**Features Needed**
 - Add picture for cards
 - House player
 - Disable features to buttons
 
-Potential
+**Potential**
 - Database (with MongoDB) for other players and info
 - Sockets with multiple rooms for players to play in
 - Betting feature
