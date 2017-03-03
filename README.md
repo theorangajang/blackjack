@@ -11,6 +11,7 @@ Uses React JS on front-end and Node on back-end
 
 **Features Needed**
 - Add picture for cards
+- Figure out how to handle Aces 
 - House player
 - Disable features to buttons
 
