@@ -21,14 +21,10 @@ class PlayerComponent extends React.Component {
 
     render() {
         const playerHands = map(this.props.playerHand, (index) => {
-            if (index.number === 'A') {
-                const aceCard = {
-                    number: index.number,
-                    suit: index.suit
-                };
-                return <AceContainer aceCard={aceCard}/>
+            if (index[0] === 'A') {
+                return <AceContainer playerHand={this.props.playerHand} foundAce={this.props.foundAce} aceCard={index}/>
             }else {
-                return <h1>{index.number}, {index.suit}</h1>
+                return <h1>{index}</h1>
             }
         });
 
@@ -49,7 +45,8 @@ class PlayerComponent extends React.Component {
 PlayerComponent.PropTypes = {
     hitMe: React.PropTypes.func.isRequired,
     foldHand: React.PropTypes.func.isRequired,
-    playerHand: React.PropTypes.array.isRequired
+    playerHand: React.PropTypes.array.isRequired,
+    foundAce: React.PropTypes.bool.isRequired
 };
 
 export default PlayerComponent

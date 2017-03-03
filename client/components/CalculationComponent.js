@@ -12,16 +12,18 @@ class CalculationComponent extends React.Component {
         this.props.resetEntireGame();
     }
 
+    checkScore(){
+        if(this.props.amount <= 21) {
+            return(<h2>{this.props.amount}</h2>);
+        }else{
+            return(<div><button onClick={this.resetGame}>Reset Game</button><h2>You Lost!</h2></div>);
+        }
+    }
+
     render() {
         return (
             <div>
-                {(this.props.amount <= 21) ?
-                    (<h2>{this.props.amount}</h2>) :
-                    (<div>
-                        <button onClick={this.resetGame}>Reset Game</button>
-                        <h2>You Lost!</h2>
-                    </div>)
-                }
+                {this.checkScore()}
             </div>
         )
     }

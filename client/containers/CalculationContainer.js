@@ -12,6 +12,7 @@ class CalculationContainer extends React.Component {
         this.resetEntireGame = this.resetEntireGame.bind(this);
     }
 
+
     componentWillReceiveProps(nextProps) {
         console.log("CalculationComponent is about to receive props");
         console.log(nextProps);

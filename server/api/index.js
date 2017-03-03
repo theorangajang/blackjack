@@ -1,31 +1,30 @@
 import express from 'express';
-import { createDeckFunc, shuffleFunc, dealCardsFunc, hitMeFunc, foldHandFunc, calculatePlayerHandWithAce, getSumValueOfPlayerHand } from '../deckMethods';
+import { shuffleFunc, dealCardsFunc, hitMeFunc, foldHandFunc, calculatePlayerHandAmount, calculatePlayerHandWithAce } from '../deckMethods';
 import jwt from 'jsonwebtoken';
 
 let router = express.Router();
-let deck = createDeckFunc();
 
 router.get('/create', (req, res) => {
-    let shuffledDeck = shuffleFunc(deck);
+    let shuffledDeck = shuffleFunc();
     res.json({ deckData: shuffledDeck });
 });
 
-router.get('/calculate', (req, res) => {
-    let sum = getSumValueOfPlayerHand();
+router.post('/calculate', (req, res) => {
+    let sum = calculatePlayerHandAmount(req.body);
     res.json({ handSum: sum });
 });
 
 router.post('/ace', (req, res) => {
-    calculatePlayerHandWithAce(req.body.value);
-    res.json({message: "you have successfully chosen ace val"})
+    let sum = calculatePlayerHandAmount(req.body.hand) + req.body.value.value;
+    res.json({handSum: sum})
 });
 
 router.post('/deal', (req, res) => {
-    console.log(req.body);
    let dealGameState = dealCardsFunc(req.body);
    res.json({
+       foundAce: dealGameState.foundAce,
        hand: dealGameState.hand,
-       withNewDeck: dealGameState.withNewDeck
+       withNewDeck: dealGameState.newDeck
    });
 });
 

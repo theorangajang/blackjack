@@ -30,7 +30,7 @@ class PlayerContainer extends React.Component {
 
     render() {
         return (
-            <PlayerComponent hitMe={this.hitMe} foldHand={this.foldHand} playerHand={this.props.playerHand}/>
+            <PlayerComponent hitMe={this.hitMe} foldHand={this.foldHand} foundAce={this.props.foundAce} playerHand={this.props.playerHand}/>
         )
     }
 }
@@ -41,6 +41,7 @@ PlayerContainer.PropTypes = {
 
 const mapStateToProps = (store) => {
     return {
+        foundAce: store.cardGameState.player.foundAce,
         playerHand: store.cardGameState.player.hand,
         deck: store.cardGameState.deck
     }

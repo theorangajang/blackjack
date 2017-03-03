@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm build && nodemon --watch server --exec babel-node -- server.js",
     "build": "webpack --config ./webpack.config.dev.js --progress --colors",
-    "test": "mocha --compilers js:babel-core/register -–require ./server/test/*.js -–watch"
+    "test": "mocha --compilers js:babel-core/register --watch ./server/tests/*"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
   "homepage": "https://github.com/theorangajang/blackjack#readme",
   "dependencies": {
     "axios": "^0.15.3",
+    "babel-polyfill": "^6.23.0",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "express-session": "^1.14.2",

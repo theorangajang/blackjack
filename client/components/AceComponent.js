@@ -22,7 +22,7 @@ class AceComponent extends React.Component {
         let aceVal = {
             value: parseInt(e.target.value)
         };
-        this.props.chosenAceVal(aceVal);
+        this.props.chosenAce(aceVal);
     }
 
     render() {
@@ -30,8 +30,8 @@ class AceComponent extends React.Component {
             <div>
                 { (this.state.aceValChosen) ?
                     (<div>
-                        <h1>{this.props.aceCard.number}, {this.props.aceCard.suit}</h1>
-                    </div>):
+                        <h1>{this.props.aceCard}</h1>
+                    </div>) :
                     (<div>
                         <h4>How much would you like your ace to be worth?</h4>
                         <button type="submit" className="ace" value="1" onClick={this.aceValue}>1</button>
@@ -44,8 +44,8 @@ class AceComponent extends React.Component {
 }
 
 AceComponent.PropTypes = {
-    aceCard: React.PropTypes.object.isRequired,
-    chosenAceVal: React.PropTypes.func.isRequired,
+    aceCard: React.PropTypes.string.isRequired,
+    chosenAce: React.PropTypes.func.isRequired,
     aceHasBeenChosen: React.PropTypes.bool.isRequired
 };
 

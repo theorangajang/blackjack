@@ -20,6 +20,7 @@ export default (state = initialState, action) => {
             state = {
                 ...state,
                 player: {
+                    foundAce: action.payload.foundAce,
                     hand: action.payload.hand
                 },
                 deck: action.payload.deck
@@ -29,6 +30,7 @@ export default (state = initialState, action) => {
             state = {
                 ...state,
                 player: {
+                    foundAce: action.payload.foundAce,
                     hand: action.payload.hand
                 },
                 deck: action.payload.deck

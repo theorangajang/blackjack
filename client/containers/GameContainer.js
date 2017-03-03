@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { startGame, dealCards } from '../actions/index';
+import { startGame, dealCards, calculateHand } from '../actions/index';
 import GameComponent from '../components/GameComponent';
 import BoardContainer from '../containers/BoardContainer';
 
@@ -51,4 +51,4 @@ const mapStateToProps = (store) => {
     }
 };
 
-export default connect(mapStateToProps, { startGame, dealCards })(GameContainer)
+export default connect(mapStateToProps, { startGame, dealCards, calculateHand })(GameContainer)

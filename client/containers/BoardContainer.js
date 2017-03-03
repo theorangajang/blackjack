@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import BoardComponent from '../components/BoardComponent';
 
 class BoardContainer extends React.Component{

@@ -5,22 +5,16 @@ import * as action from './constants';
 
 let url = "http://localhost:3000";
 
-//////////////////////////
-///////GET HAND SUM///////
-//////////////////////////
-function getHandSum(){
+function calculateHand(playerHand){
+    console.log(playerHand);
     return dispatch => {
-        return axios.get(url+'/api/calculate')
+        return axios.post(url+'/api/calculate', playerHand)
             .then((calculatedResponse) => {
                 console.log(calculatedResponse.data.handSum);
                 dispatch(calculationHandAction(calculatedResponse.data.handSum));
             });
     }
 }
-
-//////////////////////////
-///////DECK ACTIONS///////
-//////////////////////////
 
 //CREATE GAME
 export function startGame(){
@@ -34,13 +28,13 @@ export function startGame(){
 }
 
 //CHOSEN ACE VALUE
-export function chosenAceVal(aceValChosen){
+export function chosenAceVal(handWithAce){
     return dispatch => {
-        return axios.post(url+"/api/ace", aceValChosen)
+        return axios.post(url+"/api/ace", handWithAce)
             .then((res) => {
                 console.log(res.data.message);
                 dispatch(aceValHasBeenChosen());
-                dispatch(getHandSum());
+                dispatch(calculateHand());
         });
     }
 }
@@ -51,7 +45,7 @@ export function dealCards(currentDeck){
         return axios.post(url+'/api/deal', currentDeck)
             .then((res) => {
                 dispatch(dealCardsAction(res.data));
-                dispatch(getHandSum());
+                dispatch(calculateHand(res.data.hand));
             });
     }
 }
@@ -62,7 +56,7 @@ export function hitMe(gameState){
         return axios.post(url+'/api/hit', gameState)
             .then((res) => {
                 dispatch(hitMeAction(res.data));
-                dispatch(getHandSum());
+                dispatch(calculateHand(res.data.hand));
             });
     }
 }
@@ -101,6 +95,7 @@ function dealCardsAction(playersHand){
     return {
         type: action.DEAL_CARDS,
         payload: {
+            foundAce: playersHand.foundAce,
             hand: playersHand.hand,
             deck: playersHand.withNewDeck
         }
@@ -118,6 +113,7 @@ function hitMeAction(playersHand){
     return {
         type: action.HIT_ME,
         payload: {
+            foundAce: playersHand.foundAce,
             hand: playersHand.hand,
             deck: playersHand.deck
         }
